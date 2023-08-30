@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .forms import SignForm
 from item.models import *
 
 
@@ -13,3 +13,10 @@ def index(request):
 
 def contact(request):
     return render(request,"core/contact.html")
+
+def signup(request):
+    form = SignForm()
+
+    return render(request, "core/signup.html",{
+        'form':form
+    })

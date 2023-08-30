@@ -12,7 +12,7 @@ welcom
     <div class="grid grid-cols-3 gap-3">
         {% for item in items%}
             <div>
-                <a href="#" class="">
+                <a href="{% url 'item:detail' item.id %}" class="">
                     <div>
                         <img src="{{item.image.url}}" alt="{{item.name}}"  class=" rounded-t-xl">
                     </div>
