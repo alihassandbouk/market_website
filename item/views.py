@@ -1,7 +1,25 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Item
+from .models import Item, Category
 from .forms import NewItemForm, EditItemForm
+from django.db.models import Q
+
+def brows(request):
+    query = request.GET.get('query','')
+    Category_id = request.GET.get('category_id', 0)
+    categories = Category.objects.all()
+    items = Item.objects.filter(is_sold=False)
+
+    if query:
+        items = items.filter(name__icontains= query)
+
+    return render(request, "item/brows.html",{
+        "items":items,
+        'query':query,
+        'categories':categories,
+        'category_id':Category_id,
+    })
+
 
 
 def detail(request,pk):
